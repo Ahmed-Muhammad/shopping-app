@@ -1,10 +1,14 @@
+// ignore: unused_import
+// ignore_for_file: unused_import, duplicate_ignore
+
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/themes/themes.dart';
 import 'features/on_boarding/presentation/on_boardin_screen.dart';
-import 'features/themes/themes.dart';
+
 
 
 void main() /*async*/ {
