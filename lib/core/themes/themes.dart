@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 ThemeData darkTheme = ThemeData(
+  fontFamily: 'Jannah',
   primarySwatch: Colors.deepOrange,
   floatingActionButtonTheme:
       const FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
@@ -31,7 +32,11 @@ ThemeData darkTheme = ThemeData(
       elevation: 20),
   textTheme: const TextTheme(
     bodyText1: TextStyle(
-        fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+
+    ),
   ),
 );
 
@@ -39,10 +44,12 @@ ThemeData lightTheme = ThemeData(
   textTheme: const TextTheme(
     bodyText1: TextStyle(
       fontSize: 18,
+
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
   ),
+  fontFamily: 'Jannah',
   primarySwatch: Colors.deepOrange,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: Colors.deepOrange,
@@ -52,8 +59,7 @@ ThemeData lightTheme = ThemeData(
       titleSpacing: 20,
       iconTheme: IconThemeData(color: Colors.black),
       systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.red,
-          statusBarBrightness: Brightness.dark),
+          statusBarColor: Colors.red, statusBarBrightness: Brightness.dark),
       backgroundColor: Colors.white,
       elevation: 0,
       titleTextStyle: TextStyle(
@@ -67,4 +73,5 @@ ThemeData lightTheme = ThemeData(
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
       elevation: 20),
+
 );
