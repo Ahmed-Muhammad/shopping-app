@@ -48,7 +48,7 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
-  ),
+      ),
   fontFamily: 'Jannah',
   primarySwatch: Colors.deepOrange,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
