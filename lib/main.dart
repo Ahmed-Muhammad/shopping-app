@@ -1,5 +1,4 @@
-// ignore: unused_import
-// ignore_for_file: unused_import, duplicate_ignore
+// ignore_for_file: unused_import
 
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -7,18 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/themes/themes.dart';
+import 'features/login_screen/Widgets/cubit/bloc_observer.dart';
 import 'features/on_boarding/presentation/on_boardin_screen.dart';
 
 
 
 void main() /*async*/ {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // DioHelper.init();
   // await CacheHelper.init();
-  // BlocOverrides.runZoned(
-  //   () => runApp(const MyApp()),
-  //   blocObserver: MyBlocObserver(),
-  // );
+  BlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+    blocObserver: MyBlocObserver(),
+  );
   runApp(const MyApp());
 }
 

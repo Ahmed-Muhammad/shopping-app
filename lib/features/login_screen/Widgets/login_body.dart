@@ -28,7 +28,7 @@ class LoginBody extends StatelessWidget {
                     .headline5
                     ?.copyWith(fontSize: 45),
               ),
-              Text('login now To view the application ',
+              Text('login now to view the application ',
                   style: Theme
                       .of(context)
                       .textTheme
