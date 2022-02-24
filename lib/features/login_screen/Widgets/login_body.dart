@@ -72,9 +72,18 @@ class LoginBody extends StatelessWidget {
                               }
                               return null;
                             },
+                            //as
                             label: 'Password',
                             prefix: Icons.lock_outlined,
                             suffix: Icons.visibility_outlined,
+                            onSubmit: (value) {
+                              if (formKey.currentState!.validate()) {
+                                LoginCubit.get(context).userLogin(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                              }
+                            },
                             suffixPressed: () {},
                           ),
                           const SizedBox(
