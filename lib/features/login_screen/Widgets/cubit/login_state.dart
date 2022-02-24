@@ -1,10 +1,10 @@
 
-abstract class LoginState {}
+abstract class LoginStates {}
 
-class LoginInitialState extends LoginState {}
-class LoginLoadingState extends LoginState {}
-class LoginSuccessState extends LoginState {}
-class LoginErrorState extends LoginState {
+class LoginInitialState extends LoginStates {}
+class LoginLoadingState extends LoginStates {}
+class LoginSuccessState extends LoginStates {}
+class LoginErrorState extends LoginStates {
   final String error;
   LoginErrorState(this.error);
 }

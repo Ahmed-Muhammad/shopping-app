@@ -6,7 +6,7 @@ import 'package:untitled2/network/remote/dio_helper.dart';
 
 import 'login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitialState());
 
   static LoginCubit get(context) => BlocProvider.of(context);
@@ -27,6 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginSuccessState());
     }).catchError((error) {
       emit(LoginErrorState(error.toString()));
+      print(error.toString());
     });
   }
 }
