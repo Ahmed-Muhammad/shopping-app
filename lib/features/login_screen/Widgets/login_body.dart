@@ -25,6 +25,7 @@ class LoginBody extends StatelessWidget {
           if (state is LoginSuccessState) {
             if (state.loginModel.status) {
               print(state.loginModel.message);
+              print(state.loginModel.data?.token);
 
               Fluttertoast.showToast(
                   msg: state.loginModel.message,

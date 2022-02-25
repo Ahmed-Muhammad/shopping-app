@@ -1,12 +1,13 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/model/Data/received_data_model.dart';
-import 'package:untitled2/web/end_points.dart';
+import 'package:untitled2/model/Data/login_model.dart';
 
 
-import '../../../../web/remote/dio_helper.dart';
+
+
+import '../../../../core/web/API/dio_helper.dart';
+import '../../../../core/web/end_points.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
@@ -25,19 +26,19 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoginLoadingState());
     DioHelper.postData(
       url: login,
+      lang: "ar",
       data: {
         'email': email,
         'password': password,
       },
     ).then((value) {
-        print(value.data);
+      print(value.data);
       //اخدت الداتا اللي جاياني من السيرفر
-       loginModel = LoginModel.fromJson(value.data);
-
+      loginModel = LoginModel.fromJson(value.data);
       emit(LoginSuccessState(loginModel!));
     }).catchError((error) {
       emit(LoginErrorState(error.toString()));
-      print('error is =======> , ${error.toString()}');
+      print('error in posting Data is  =======> , ${error.toString()}');
     });
   }
 
@@ -51,4 +52,7 @@ class LoginCubit extends Cubit<LoginStates> {
         obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(LoginChangePasswordVisibilityState());
   }
+
+
+
 }

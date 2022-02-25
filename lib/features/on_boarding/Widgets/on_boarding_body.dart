@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 
-import '../../login_screen/ui/login_screen.dart';
+import 'on_boarding_cubit.dart';
 
 class BoardingModel {
   BoardingModel({required this.image, required this.title, required this.body});
@@ -97,12 +97,9 @@ class _OnBoardingBodyState extends State<OnBoardingBody> {
               const Spacer(),
               FloatingActionButton(
                 onPressed: () {
-                  if (isLast) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ));
+                  if (isLast)
+                  {
+                    OnBoardingCubit.get(context).submit(context);
                   } else {
                     setState(() {
                       boardController?.nextPage(

@@ -1,4 +1,4 @@
-import 'package:untitled2/model/Data/received_data_model.dart';
+import 'package:untitled2/model/Data/login_model.dart';
 
 abstract class LoginStates {}
 
@@ -21,3 +21,7 @@ class LoginErrorState extends LoginStates {
 //------------------Change Password Visibility State-----------
 
 class LoginChangePasswordVisibilityState extends LoginStates {}
+
+
+//------------------CacheHelperSaveDataState-----------
+class CacheHelperSaveDataState extends LoginStates {}
