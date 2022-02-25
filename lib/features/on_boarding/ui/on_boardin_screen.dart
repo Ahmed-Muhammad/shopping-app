@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../login_screen/presentation/login_screen.dart';
+
+import '../../login_screen/ui/login_screen.dart';
 import '../Widgets/on_boarding_body.dart';
 
 class OnBoardingScreen extends StatelessWidget {

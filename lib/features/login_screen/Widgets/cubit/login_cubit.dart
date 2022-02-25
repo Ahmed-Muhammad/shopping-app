@@ -2,15 +2,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/network/end_points.dart';
-import 'package:untitled2/network/remote/dio_helper.dart';
+import 'package:untitled2/model/Data/received_data_model.dart';
+import 'package:untitled2/web/end_points.dart';
 
+
+import '../../../../web/remote/dio_helper.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitialState());
 
+//------عشان اعرف استدعي ال cubit بطريقه بسيطه في اي مكان  -----
   static LoginCubit get(context) => BlocProvider.of(context);
+
+  LoginModel? loginModel;
 
   //-------------------------------login function --------------
   void userLogin({
@@ -25,12 +30,14 @@ class LoginCubit extends Cubit<LoginStates> {
         'password': password,
       },
     ).then((value) {
-      print(value.data);
-      print(value.data['message']);
-      emit(LoginSuccessState());
+        print(value.data);
+      //اخدت الداتا اللي جاياني من السيرفر
+       loginModel = LoginModel.fromJson(value.data);
+
+      emit(LoginSuccessState(loginModel!));
     }).catchError((error) {
       emit(LoginErrorState(error.toString()));
-      print(error.toString());
+      print('error is =======> , ${error.toString()}');
     });
   }
 
@@ -40,9 +47,8 @@ class LoginCubit extends Cubit<LoginStates> {
 
   void changePasswordVisibility() {
     obscureText = !obscureText;
-    suffix = obscureText
-        ? Icons.visibility_outlined
-        : Icons.visibility_off_outlined;
+    suffix =
+        obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(LoginChangePasswordVisibilityState());
   }
 }

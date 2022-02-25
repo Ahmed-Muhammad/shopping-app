@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../login_screen/presentation/login_screen.dart';
+
+import '../../login_screen/ui/login_screen.dart';
 
 class BoardingModel {
   BoardingModel({required this.image, required this.title, required this.body});

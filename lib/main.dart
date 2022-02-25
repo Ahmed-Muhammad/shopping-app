@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/themes/themes.dart';
 import 'features/login_screen/Widgets/cubit/bloc_observer.dart';
-import 'features/on_boarding/presentation/on_boardin_screen.dart';
-import 'network/remote/dio_helper.dart';
+import 'features/on_boarding/ui/on_boardin_screen.dart';
+import 'web/remote/dio_helper.dart';
 
 
 
