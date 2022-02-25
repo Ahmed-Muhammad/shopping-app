@@ -74,8 +74,16 @@ class LoginBody extends StatelessWidget {
                             },
                             //as
                             label: 'Password',
+                            //using Login cubit
+                            obscureText: LoginCubit.get(context).obscureText,
                             prefix: Icons.lock_outlined,
-                            suffix: Icons.visibility_outlined,
+                            //using Login cubit
+                            suffix: LoginCubit.get(context).suffix,
+                            suffixPressed: () {
+                              //using Login cubit
+                              LoginCubit.get(context)
+                                  .changePasswordVisibility();
+                            },
                             onSubmit: (value) {
                               if (formKey.currentState!.validate()) {
                                 LoginCubit.get(context).userLogin(
@@ -84,7 +92,6 @@ class LoginBody extends StatelessWidget {
                                 );
                               }
                             },
-                            suffixPressed: () {},
                           ),
                           const SizedBox(
                             height: 15,

@@ -142,8 +142,10 @@ Widget defaultFormField({
   bool isClickable = true,
   IconData? suffix,
   void Function()? suffixPressed,
+  bool obscureText = false,
 }) =>
     TextFormField(
+      obscureText: obscureText ,
       enabled: isClickable,
       controller: controller,
       keyboardType: type,
