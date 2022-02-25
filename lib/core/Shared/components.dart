@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Widget articleBuilder(list) => ConditionalBuilder(
       condition: list.length > 0,
@@ -145,7 +146,7 @@ Widget defaultFormField({
   bool obscureText = false,
 }) =>
     TextFormField(
-      obscureText: obscureText ,
+      obscureText: obscureText,
       enabled: isClickable,
       controller: controller,
       keyboardType: type,
@@ -201,9 +202,47 @@ Widget myDivider() => Padding(
       ),
     );
 
+
+//--------------Navigator To Page -----------------------
 void navigateTo(context, widget) => Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => widget,
       ),
     );
+
+void navigateAndFinish(context, widget) => Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
+
+//---------SHOW TOAST AND CHANGE IT'S COLOR-------------
+void showToast({required String message, required ToastStates state}) {
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: chooseToastColor(state),
+      textColor: Colors.white,
+      fontSize: 16.0);
+}
+
+enum ToastStates { success, error, warning }
+
+Color? chooseToastColor(ToastStates state) {
+  Color? color;
+  switch (state) {
+    case ToastStates.success:
+      color = Colors.green;
+      break;
+    case ToastStates.error:
+      color = Colors.red;
+      break;
+    case ToastStates.warning:
+      color = Colors.amber;
+  }
+  return color;
+}
