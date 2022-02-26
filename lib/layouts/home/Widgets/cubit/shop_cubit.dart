@@ -18,7 +18,7 @@ class ShopCubit extends Cubit<ShopStates> {
   int currentIndex = 0;
 
   List<Widget> bottomScreens = [
-    const ProductsScreen(),
+      const ProductsScreen(),
     const CategoriesScreen(),
     const FavoritesScreen(),
     const SettingsScreen(),
@@ -51,4 +51,5 @@ class ShopCubit extends Cubit<ShopStates> {
     });
     emit(LoadingHomeDataState());
   }
+
 }
