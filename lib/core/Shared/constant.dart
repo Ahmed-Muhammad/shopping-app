@@ -10,9 +10,13 @@
 // queries : country=eg&category=business&apiKey=a4c25c8b76f242c6863aedf4b21bfb3f
 
 
+// ignore_for_file: non_constant_identifier_names
+
 import '../../features/login/Screens/login_screen.dart';
 import '../cache/cache_helper.dart';
 import 'components.dart';
+
+String? token = '';
 
 signOut(context){
 

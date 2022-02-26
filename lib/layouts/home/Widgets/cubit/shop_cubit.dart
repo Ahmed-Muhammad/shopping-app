@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/Shared/components.dart';
+import 'package:untitled2/core/Shared/constant.dart';
 import 'package:untitled2/core/web/API/dio_helper.dart';
 import 'package:untitled2/core/web/end_points.dart';
 import 'package:untitled2/features/categories/screen/categories_screen.dart';
@@ -33,24 +33,18 @@ class ShopCubit extends Cubit<ShopStates> {
   HomeModel? homeModel;
 
   void getHomeData() {
-
     emit(LoadingHomeDataState());
 
     DioHelper.getData(
       url: Home,
-
+      token: token,
     ).then((value) {
-
       homeModel = HomeModel.fromJson(value.data);
 
-      // print(homeModel?.data?.banners [0].image);
-      // print(homeModel?.status);
-
-      printFullText(homeModel.toString());
+      // print(homeModel?.data?.banners![0].image);
+      //      print(homeModel?.status);
       emit(SuccessHomeDataState());
-
     }).catchError((error) {
-
       print('Error in GetHomeData is  =======> ${error.toString()}');
 
       emit(ErrorHomeDataState());

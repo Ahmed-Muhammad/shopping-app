@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 Widget articleBuilder(list) => ConditionalBuilder(
       condition: list.length > 0,
@@ -253,3 +254,22 @@ void printFullText(String text) {
     print(match.group(0));
   });
 }
+
+Widget progress(context) {
+  return Center(
+    child: SizedBox(
+      height: 80,
+      width: 80,
+      child: LiquidCircularProgressIndicator(
+        value: .80, // Defaults to 0.5.
+        valueColor: const AlwaysStoppedAnimation(Colors.blue), // Defaults to the current Theme's accentColor.
+        backgroundColor: Colors.white, // Defaults to the current Theme's backgroundColor.
+        borderColor: Colors.red,
+        borderWidth: 1.0,
+        direction: Axis.vertical, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
+        center:  const Text("Loading..."),
+      ),
+    ),
+  );
+}
+
