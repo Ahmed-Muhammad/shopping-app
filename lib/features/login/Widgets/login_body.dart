@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/Shared/components.dart';
 import 'package:untitled2/core/cache/cache_helper.dart';
+import 'package:untitled2/layouts/home/screens/shop_layout.dart';
 
-import '../../../layouts/main/screens/shop_layout.dart';
 import '../../Register/screen/register_screen.dart';
 import 'cubit/login_cubit.dart';
 import 'cubit/login_state.dart';

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/Shared/components.dart';
 import 'package:untitled2/features/search/screen/Search_screen.dart';
-import 'package:untitled2/layouts/main/Widgets/cubit/shop_cubit.dart';
-import 'package:untitled2/layouts/main/Widgets/cubit/shop_state.dart';
-
+import 'package:untitled2/layouts/home/Widgets/cubit/shop_cubit.dart';
+import 'package:untitled2/layouts/home/Widgets/cubit/shop_state.dart';
 
 class ShopLayout extends StatelessWidget {
   const ShopLayout({Key? key}) : super(key: key);
@@ -12,7 +11,7 @@ class ShopLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ShopCubit(),
+      create: (context) => ShopCubit()..getHomeData(),
       child: BlocConsumer<ShopCubit, ShopStates>(
         listener: (context, state) {},
         builder: (context, state) {

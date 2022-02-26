@@ -202,7 +202,6 @@ Widget myDivider() => Padding(
       ),
     );
 
-
 //--------------Navigator To Page -----------------------
 void navigateTo(context, widget) => Navigator.push(
       context,
@@ -245,4 +244,12 @@ Color? chooseToastColor(ToastStates state) {
       color = Colors.amber;
   }
   return color;
+}
+
+void printFullText(String text) {
+  // 800 is the size of each chunk
+  final pattern = RegExp('.{1,800}');
+  pattern.allMatches(text).forEach((match) {
+    print(match.group(0));
+  });
 }

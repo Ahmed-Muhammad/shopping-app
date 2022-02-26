@@ -1,7 +1,7 @@
-// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/model/Data/login_model.dart';
+import 'package:untitled2/model/login/login_model.dart';
 
 
 
@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginStates> {
   }) {
     emit(LoginLoadingState());
     DioHelper.postData(
-      url: login,
+      url: LOGIN,
       lang: "ar",
       data: {
         'email': email,

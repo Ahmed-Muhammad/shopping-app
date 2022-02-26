@@ -9,7 +9,7 @@ import 'core/web/API/dio_helper.dart';
 import 'features/login/Screens/login_screen.dart';
 import 'features/login/Widgets/cubit/bloc_observer.dart';
 import 'features/on_boarding/Screens/on_boardin_screen.dart';
-import 'layouts/main/screens/shop_layout.dart';
+import 'layouts/home/screens/shop_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
