@@ -16,7 +16,10 @@ class ShopLayout extends StatelessWidget {
         var cubit = ShopCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text('El-Wekala'),
+            title: const Text(
+              'El-Wekala',
+            ),
+            centerTitle: true,
             actions: [
               //search screen icon
               IconButton(
@@ -25,7 +28,7 @@ class ShopLayout extends StatelessWidget {
                   const SearchScreen(),
                 ),
                 icon: const Icon(Icons.search),
-              )
+              ),
             ],
           ),
           body: cubit.bottomScreens[cubit.currentIndex],
