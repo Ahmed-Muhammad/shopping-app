@@ -8,3 +8,17 @@
 // base url : https://newsapi.org/
 // method (url) : v2/top-headlines?
 // queries : country=eg&category=business&apiKey=a4c25c8b76f242c6863aedf4b21bfb3f
+
+
+import '../../features/login/Screens/login_screen.dart';
+import '../cache/cache_helper.dart';
+import 'components.dart';
+
+signOut(context){
+
+  CacheHelper.removeData(key: 'token').then((value) {
+    if (value == true) {
+      navigateAndFinish(context, const LoginScreen());
+    }
+  });
+}

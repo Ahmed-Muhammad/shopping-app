@@ -37,8 +37,15 @@ class CacheHelper {
     }
   }
 
-  //---------- GET Data from onBoarding screen saved ------------
+  //---------- GET Data from onBoarding  screen saved & token ------------
   static dynamic getData({required String key}) {
     return sharedPreferences?.get(key);
+  }
+
+//---------- GET Data from onBoarding screen saved ------------
+  static Future<bool?> removeData({
+    required String key,
+  }) async {
+    return await sharedPreferences?.remove(key);
   }
 }

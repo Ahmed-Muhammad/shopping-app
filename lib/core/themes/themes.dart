@@ -4,7 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 ThemeData darkTheme = ThemeData(
   fontFamily: 'Jannah',
-  primarySwatch: Colors.deepOrange,
+  primarySwatch: Colors.blue,
   floatingActionButtonTheme:
       const FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
   scaffoldBackgroundColor: HexColor('333739'),
@@ -26,7 +26,7 @@ ThemeData darkTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.deepOrange,
+      selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
       backgroundColor: HexColor('333739'),
       elevation: 20),
@@ -50,7 +50,7 @@ ThemeData lightTheme = ThemeData(
     ),
       ),
   fontFamily: 'Jannah',
-  primarySwatch: Colors.deepOrange,
+  primarySwatch: Colors.blue,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: Colors.deepOrange,
   ),
@@ -69,7 +69,7 @@ ThemeData lightTheme = ThemeData(
       )),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.deepOrange,
+      selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
       elevation: 20),

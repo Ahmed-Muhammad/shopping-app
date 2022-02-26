@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 import '../../../core/cache/cache_helper.dart';
-import '../../login_screen/Screens/login_screen.dart';
+import '../../login/Screens/login_screen.dart';
 part 'on_boarding_state.dart';
 
 class OnBoardingCubit extends Cubit<OnBoardingState> {

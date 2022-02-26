@@ -1,23 +1,22 @@
-// ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/features/login_screen/Screens/login_screen.dart';
-import 'package:untitled2/layout/shop/shop_layout.dart';
 
 import 'core/cache/cache_helper.dart';
 import 'core/themes/themes.dart';
 import 'core/web/API/dio_helper.dart';
-import 'features/login_screen/Widgets/cubit/bloc_observer.dart';
 
+import 'features/login/Screens/login_screen.dart';
+import 'features/login/Widgets/cubit/bloc_observer.dart';
 import 'features/on_boarding/Screens/on_boardin_screen.dart';
+import 'layouts/main/screens/shop_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
-  bool onBoarding = CacheHelper.getData(key: 'onBoarding');
-  String loginToken = CacheHelper.getData(key: 'token');
+  bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+  String? loginToken = CacheHelper.getData(key: 'token');
   Widget widget;
 
 //to decide which page to be open first using "onBoarding" and "loginToken" and set widget to that value
