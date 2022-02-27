@@ -52,8 +52,9 @@ class ShopCubit extends Cubit<ShopStates> {
 
 //----------------------------get Categories -----------
   CategoriesModel? categoriesModel;
-  void getCategories() {
 
+  void getCategories()
+  {
     DioHelper.getData(
       url: CATEGORIES,
       lang: 'en',

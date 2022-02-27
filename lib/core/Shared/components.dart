@@ -194,12 +194,12 @@ Widget defaultButton({
 
 Widget myDivider() => Padding(
       padding: const EdgeInsetsDirectional.only(
-        start: 20.0,
+        start: 20.0,end: 20
       ),
       child: Container(
         width: double.infinity,
         height: 1.0,
-        color: Colors.grey[300],
+        color: Colors.grey[400],
       ),
     );
 
@@ -271,5 +271,11 @@ Widget progress(context) {
       ),
     ),
   );
+}
+
+//--------------Capitalized Extension--------------------
+extension StringCasingExtension on String {
+  String toCapitalized() => length > 0 ?'${this[0].toUpperCase()}${substring(1).toLowerCase()}':'';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized()).join(' ');
 }
 
