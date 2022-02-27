@@ -30,6 +30,7 @@ class ProductsScreen extends StatelessWidget {
     HomeModel? homeModel,
   ) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           CarouselSlider(
@@ -63,39 +64,102 @@ class ProductsScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
-                mainAxisSpacing: 1,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1 / 1.5,
+                mainAxisSpacing: 2,
+                crossAxisSpacing: 1.5,
+                childAspectRatio: 1 / 1.52,
                 children: List.generate(
                   homeModel!.data!.products!.length,
-                  (index) => Column(
-                    children: [
-                      Image(
-                        image: NetworkImage(
-                            "${homeModel.data!.products![index].image}"),
-                        fit: BoxFit.cover,
-                        height: 200,
-                        width: double.infinity,
-                      ),
-                      Text(
-                        homeModel.data!.products![index].name!,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          height: 1.5,
-                          fontWeight: FontWeight.bold
+                  (index) => Container(
+                    color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          alignment: AlignmentDirectional.bottomStart,
+                          children: [
+                            Image(
+                              image: NetworkImage(
+                                  "${homeModel.data!.products![index].image}"),
+                              height: 200,
+                              width: double.infinity,
+                            ),
+                            if (homeModel.data!.products![index].discount != 0)
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                color: Colors.red,
+                                child: Text(
+                                  'discount'.toUpperCase(),
+                                  style: const TextStyle(
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ), //product Image
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //product Name
+                              Text(
+                                homeModel.data!.products![index].name!,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontSize: 13,
+                                    height: 1.5,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Row(
+                                children: [
+                                  //product Price
+                                  Text(
+                                    '${homeModel.data!.products![index].price!.round()}',
+                                    style: const TextStyle(
+                                        color: Colors.deepPurple,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  //product old Price
+                                  if (homeModel
+                                          .data!.products![index].discount !=
+                                      0)
+                                    Text(
+                                      '${homeModel.data!.products![index].oldPrice.round()}',
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        decoration: TextDecoration.lineThrough,
+                                        decorationStyle:
+                                            TextDecorationStyle.double,
+                                      ),
+                                    ),
+                                  const Spacer(),
+                                  IconButton(
+                                    padding: EdgeInsets.zero,
+                                    onPressed: () {
+                                      //TODO  IconButton onPressed
+                                    },
+                                    icon: const Icon(
+                                      Icons.favorite_border_rounded,
+                                      size: 15,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        '${homeModel.data!.products![index].price!.round()}',
-                        style: const TextStyle(
-                          color: Colors.deepPurple,
-                          fontSize: 14,
-                            fontWeight: FontWeight.w600
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
