@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 
-//----------------------------Create Data----------------------------------------
 class DioHelper {
   static Dio? dio;
 
+//---------- Dio --> Initialization ------------
   static init() {
     BaseOptions options = BaseOptions(
+      //عنوان api من ال back-end
       baseUrl: 'https://student.valuxapps.com/api/',
-      receiveDataWhenStatusError: false,
+      receiveDataWhenStatusError: true,
     );
     dio = Dio(options);
   }
@@ -15,8 +16,8 @@ class DioHelper {
   //----------------------------Post Data----------------------------------------
   static Future<Response> postData({
     required String url,
-    Map<String, dynamic>? query,
     required Map<String, dynamic> data,
+    Map<String, dynamic>? query,
     String? lang = 'en',
     String? token,
   }) async {

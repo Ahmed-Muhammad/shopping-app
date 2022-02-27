@@ -55,7 +55,17 @@ class ProductsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          //build products Images
+          Stack(
+            children: const [
+              Image(
+                image: NetworkImage('url'),
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+              Text('Electronics '),
+            ],
+          ),
           Container(
             color: Colors.grey[300],
             child: Padding(
@@ -164,7 +174,7 @@ class ProductsScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ), //build products Images
         ],
       ),
     );

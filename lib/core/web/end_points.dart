@@ -1,4 +1,12 @@
-// ignore_for_file: constant_identifier_names
+
+//-----------Login-------
 
 const LOGIN = 'login';
+
+//-----------Home Data -------
+
 const Home = 'home';
+
+//-----------Categories -------
+
+const CATEGORIES = 'categories';

@@ -14,18 +14,23 @@ import 'features/on_boarding/Screens/on_boardin_screen.dart';
 import 'layouts/home/screens/shop_layout.dart';
 
 void main() async {
+  //ensure every thing is Initialized then Run App
   WidgetsFlutterBinding.ensureInitialized();
+  //---------- Dio Initialization ------------
   DioHelper.init();
+  //---------- shared Preferences Initialization ------------
   await CacheHelper.init();
-  bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+  //to check if onBoarding have been seen or not,
+  //if the onBoarding is true then skip it and open to login
+  //else start it again
+    bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   //token ⬇ is saved in constant, it is an indication of
   // the profile token which carry the user information
   token = CacheHelper.getData(key: 'token');
+  //to decide which page to be open first using "onBoarding"
+ //and "token" and set widget to that value to be opened firstly
+ //according to which widest is done
   Widget widget;
-
-//to decide which page to be open first using "onBoarding"
-//and "token" and set widget to that value to be opened firstly
-//according to which widest is done
   if (onBoarding != null) {
     if (token != null) {
       widget = const ShopLayout();
@@ -36,6 +41,7 @@ void main() async {
     widget = const OnBoardingScreen();
   }
 
+//------Bloc observer ------------
   BlocOverrides.runZoned(
     () => runApp(MyApp(startWidget: widget)),
     blocObserver: MyBlocObserver(),
