@@ -16,20 +16,32 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ShopCubit cubit = ShopCubit.get(context);
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        //عملت حاله انه لو state هي اني تمام غيرت قيمه favorite في ال map
+        // وكانت حاله تغير favorite هي false في API  اطلع رساله الي ال user بأن في خطأ حصل
+        if (state is SuccessChangeFavoritesState)
+        {
+          if (state.model!.status == false)
+          {
+            showToast(message: state.model!.message, state: ToastStates.error);
+
+          }
+        }
+      },
       builder: (context, state) {
         return ConditionalBuilder(
           condition: cubit.homeModel != null && cubit.categoriesModel != null,
           fallback: (context) => progress(context),
           builder: (context) =>
-              buildProducts(cubit.homeModel!, cubit.categoriesModel!),
+              buildProducts(cubit.homeModel!, cubit.categoriesModel!, context),
         );
       },
     );
   }
 
-  Widget buildProducts(
-          HomeModel? homeModel, CategoriesModel? categoriesModel) =>
+  Widget buildProducts(HomeModel? homeModel,
+      CategoriesModel? categoriesModel,
+      context,) =>
       SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -37,11 +49,12 @@ class ProductsScreen extends StatelessWidget {
           children: [
             CarouselSlider(
               items: homeModel?.data?.banners!
-                  .map((e) => Image(
-                        image: NetworkImage("${e.image}"),
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ))
+                  .map((e) =>
+                  Image(
+                    image: NetworkImage("${e.image}"),
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ))
                   .toList(),
               options: CarouselOptions(
                 height: 225,
@@ -75,11 +88,14 @@ class ProductsScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      separatorBuilder: (context, index) => const SizedBox(
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(
                         width: 10,
                       ),
                       itemCount: categoriesModel!.data!.data!.length,
-                      itemBuilder: (context, index) => buildCategoryItems(categoriesModel.data!.data![index]),
+                      itemBuilder: (context, index) =>
+                          buildCategoryItems(
+                              categoriesModel.data!.data![index]),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -107,100 +123,114 @@ class ProductsScreen extends StatelessWidget {
                   childAspectRatio: 1 / 1.52,
                   children: List.generate(
                     homeModel!.data!.products!.length,
-                    (index) => Container(
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
-                            alignment: AlignmentDirectional.bottomStart,
-                            children: [
-                              Image(
-                                image: NetworkImage(
-                                    "${homeModel.data!.products![index].image}"),
-                                height: 200,
-                                width: double.infinity,
-                              ),
-                              if (homeModel.data!.products![index].discount !=
-                                  0)
-                                Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  color: Colors.red,
-                                  child: Text(
-                                    'discount'.toUpperCase(),
-                                    style: const TextStyle(
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                        (index) {
+                      return Container(
+                        color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
+                              alignment: AlignmentDirectional.bottomStart,
+                              children: [
+                                Image(
+                                  image: NetworkImage(
+                                      "${homeModel.data!.products![index]
+                                          .image}"),
+                                  height: 200,
+                                  width: double.infinity,
+                                ),
+                                if (homeModel.data!.products![index].discount !=
+                                    0)
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    color: Colors.red,
+                                    child: Text(
+                                      'discount'.toUpperCase(),
+                                      style: const TextStyle(
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                            ],
-                          ), //product Image
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                //product Name
-                                Text(
-                                  homeModel.data!.products![index].name!,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      fontSize: 13,
-                                      height: 1.5,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Row(
-                                  children: [
-                                    //product Price
-                                    Text(
-                                      '${homeModel.data!.products![index].price!.round()}',
-                                      style: const TextStyle(
-                                          color: Colors.deepPurple,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    //product old Price
-                                    if (homeModel
-                                            .data!.products![index].discount !=
-                                        0)
-                                      Text(
-                                        '${homeModel.data!.products![index].oldPrice.round()}',
-                                        style: const TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          decorationStyle:
-                                              TextDecorationStyle.double,
-                                        ),
-                                      ),
-                                    const Spacer(),
-                                    IconButton(
-                                      padding: EdgeInsets.zero,
-                                      onPressed: () {
-                                        //TODO  IconButton onPressed
-                                      },
-                                      icon: const Icon(
-                                        Icons.favorite_border_rounded,
-                                        size: 15,
-                                      ),
-                                    )
-                                  ],
-                                ),
                               ],
+                            ), //product Image
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //product Name
+                                  Text(
+                                    homeModel.data!.products![index].name!,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        height: 1.5,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Row(
+                                    children: [
+                                      //product Price
+                                      Text(
+                                        '${homeModel.data!.products![index]
+                                            .price!.round()}',
+                                        style: const TextStyle(
+                                            color: Colors.deepPurple,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      //product old Price
+                                      if (homeModel.data!.products![index]
+                                          .discount !=
+                                          0)
+                                        Text(
+                                          '${homeModel.data!.products![index]
+                                              .oldPrice.round()}',
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            decoration:
+                                            TextDecoration.lineThrough,
+                                            decorationStyle:
+                                            TextDecorationStyle.double,
+                                          ),
+                                        ),
+                                      // Icons.favorite_border
+                                      const Spacer(),
+                                      IconButton(
+                                        onPressed: () {
+                                          ShopCubit.get(context)
+                                              .changeFavorites(
+                                            homeModel.data!.products![index].id,
+                                          );
+                                        },
+                                        icon: Icon(
+                                          ShopCubit
+                                              .get(context)
+                                              .favorites[
+                                          homeModel.data!
+                                              .products![index].id]
+                                              ? Icons.favorite_outlined
+                                              : Icons.favorite_border,
+                                          size: 20,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -209,13 +239,14 @@ class ProductsScreen extends StatelessWidget {
         ),
       );
 
-  Widget buildCategoryItems(CategoriesDataInfo? categoriesDataInfo) => SizedBox(
+  Widget buildCategoryItems(CategoriesDataInfo? categoriesDataInfo) =>
+      SizedBox(
         height: 100,
         width: 100,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-             Image(
+            Image(
               image: NetworkImage(categoriesDataInfo!.image!),
               height: 100,
               width: 100,
@@ -224,7 +255,7 @@ class ProductsScreen extends StatelessWidget {
             Container(
               color: Colors.black.withOpacity(.8),
               width: double.infinity,
-              child:  Text(
+              child: Text(
                 categoriesDataInfo.name!.toCapitalized(),
                 textAlign: TextAlign.center,
                 maxLines: 1,

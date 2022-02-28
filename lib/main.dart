@@ -27,6 +27,7 @@ void main() async {
   //token ⬇ is saved in constant, it is an indication of
   // the profile token which carry the user information
   token = CacheHelper.getData(key: 'token');
+  print('token ====>"$token"');
   //to decide which page to be open first using "onBoarding"
  //and "token" and set widget to that value to be opened firstly
  //according to which widest is done

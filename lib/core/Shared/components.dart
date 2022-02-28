@@ -219,9 +219,9 @@ void navigateAndFinish(context, widget) => Navigator.pushReplacement(
     );
 
 //---------SHOW TOAST AND CHANGE IT'S COLOR-------------
-void showToast({required String message, required ToastStates state}) {
+void showToast({required String? message, required ToastStates state}) {
   Fluttertoast.showToast(
-      msg: message,
+      msg: message!,
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 5,
