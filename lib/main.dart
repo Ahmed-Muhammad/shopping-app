@@ -23,14 +23,14 @@ void main() async {
   //to check if onBoarding have been seen or not,
   //if the onBoarding is true then skip it and open to login
   //else start it again
-    bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+  bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   //token ⬇ is saved in constant, it is an indication of
   // the profile token which carry the user information
   token = CacheHelper.getData(key: 'token');
   print('token ====>"$token"');
   //to decide which page to be open first using "onBoarding"
- //and "token" and set widget to that value to be opened firstly
- //according to which widest is done
+  //and "token" and set widget to that value to be opened firstly
+  //according to which widest is done
   Widget widget;
   if (onBoarding != null) {
     if (token != null) {
@@ -64,9 +64,12 @@ class MyApp extends StatelessWidget {
         ),
         //ShopCubit
         BlocProvider(
-          create: (context) => ShopCubit()..getHomeData()..getCategories(),
+          create: (context) => ShopCubit()
+            ..getProfile()
+            ..getHomeData()
+            ..getCategories()
+            ..getFavorites(),
         ),
-
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

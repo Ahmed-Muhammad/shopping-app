@@ -1,7 +1,7 @@
 //الرسائل الوارده من السيرفر في حاله تسجيل الدخول او حدوث اي خطأ
 class LoginModel {
   late bool status;
-  late String message;
+  String? message;
   Data? data;
 
   LoginModel.fromJson(Map<dynamic, dynamic> json) {
@@ -13,14 +13,14 @@ class LoginModel {
 
 //رد السيرفر ببيانات العملاء المحفوظه فيه
 class Data {
-  late int id;
-  late String name;
-  late String email;
-  late String phone;
-  late String image;
-  late int points;
-  late int credit;
-  late String token;
+   int? id;
+   String? name;
+   String? email;
+   String? phone;
+   String? image;
+   int? points;
+   int? credit;
+   String? token;
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];

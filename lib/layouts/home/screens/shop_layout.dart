@@ -5,6 +5,8 @@ import 'package:untitled2/features/search/screen/Search_screen.dart';
 import 'package:untitled2/layouts/home/Widgets/cubit/shop_cubit.dart';
 import 'package:untitled2/layouts/home/Widgets/cubit/shop_state.dart';
 
+import '../Widgets/Side Bar/my_drawer.dart';
+
 class ShopLayout extends StatelessWidget {
   const ShopLayout({Key? key}) : super(key: key);
 
@@ -50,12 +52,10 @@ class ShopLayout extends StatelessWidget {
                 icon: Icon(Icons.favorite_outline),
                 label: 'Favorites',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
-              ),
+
             ],
           ),
+          drawer: const MyDrawer(),
         );
       },
     );

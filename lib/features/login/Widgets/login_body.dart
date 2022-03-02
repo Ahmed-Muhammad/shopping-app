@@ -4,6 +4,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/Shared/components.dart';
+import 'package:untitled2/core/Shared/constant.dart';
 import 'package:untitled2/core/cache/cache_helper.dart';
 import 'package:untitled2/layouts/home/screens/shop_layout.dart';
 
@@ -29,10 +30,13 @@ class LoginBody extends StatelessWidget {
               key: 'token',
               value: state.loginModel.data?.token,
             ).then(
-              (value) => navigateAndFinish(
-                context,
-                const ShopLayout(),
-              ),
+              (value) {
+                token = state.loginModel.data?.token;
+                navigateAndFinish(
+                  context,
+                  const ShopLayout(),
+                );
+              },
             );
           } else {
             print(state.loginModel.message);

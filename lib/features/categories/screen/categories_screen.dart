@@ -30,8 +30,8 @@ Widget buildCategoriesItem(CategoriesDataInfo categoriesDataInfo) => Padding(
       child: Row(
         children:  [
           Image(
-            width: 120,
-            height: 120,
+            width: 80,
+            height: 80,
             fit: BoxFit.cover,
             image: NetworkImage(categoriesDataInfo.image!),
           ),
@@ -40,7 +40,7 @@ Widget buildCategoriesItem(CategoriesDataInfo categoriesDataInfo) => Padding(
           ),
            Text(
              categoriesDataInfo.name!.toCapitalized(),
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const Spacer(),
           const Icon(Icons.arrow_forward_outlined)

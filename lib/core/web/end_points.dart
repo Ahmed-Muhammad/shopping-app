@@ -14,3 +14,7 @@ const CATEGORIES = 'categories';
 //-----------Favorite  -------
 
 const FAVORITE = 'favorites';
+
+//-----------profile  -------
+
+const PROFILE = 'profile';

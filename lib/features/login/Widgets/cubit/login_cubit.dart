@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:untitled2/model/login/login_model.dart';
-
-
-
 
 import '../../../../core/web/API/dio_helper.dart';
 import '../../../../core/web/end_points.dart';
@@ -52,7 +49,4 @@ class LoginCubit extends Cubit<LoginStates> {
         obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(LoginChangePasswordVisibilityState());
   }
-
-
-
 }
