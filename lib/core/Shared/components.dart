@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
+import '../../layouts/home/Widgets/cubit/shop_cubit.dart';
+
 Widget articleBuilder(list) => ConditionalBuilder(
       condition: list.length > 0,
       fallback: (context) => const Center(child: CircularProgressIndicator()),
@@ -277,5 +279,111 @@ Widget progress(context) {
 extension StringCasingExtension on String {
   String toCapitalized() => length > 0 ?'${this[0].toUpperCase()}${substring(1).toLowerCase()}':'';
   String toTitleCase() => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized()).join(' ');
+}
+
+
+Widget buildListProduct(context,{bool isOldPrice = true,required model}) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: SizedBox(
+      height: 120,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 120,
+            width: 120,
+            child: Stack(
+              alignment: AlignmentDirectional.bottomStart,
+              children: [
+                Image(
+                  image: NetworkImage(model!.product!.image!),
+                  height: 120,
+                  width: 120,
+                ),
+                if (model.product!.discount != 0 && isOldPrice)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    color: Colors.red,
+                    child: Text(
+                      'discount'.toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 20),
+          //product Image
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //product Name
+                Text(
+                  model.product!.name!,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontSize: 13, height: 1.5, fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    //product Price
+                    Text(
+                      model.product!.price!.toString(),
+                      style: const TextStyle(
+                          color: Colors.deepPurple,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    //product old Price
+                    if (model.product!.discount != 0 && isOldPrice)
+                      Text(
+                        isOldPrice ? model.product!.oldPrice!.toString() : '',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.lineThrough,
+                          decorationStyle: TextDecorationStyle.double,
+                        ),
+                      ),
+                    // Icons.favorite_border
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        ShopCubit.get(context).changeFavorites(
+                          model.product!.id,
+                        );
+                      },
+                      icon: Icon(
+                        ShopCubit.get(context).favorites[model.product!.id]
+                            ? Icons.favorite_outlined
+                            : Icons.favorite_border,
+                        size: 25,
+                        color: ShopCubit.get(context)
+                            .favorites[model.product!.id]
+                            ? Colors.red
+                            : Colors.grey,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 

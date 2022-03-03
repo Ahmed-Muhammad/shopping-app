@@ -22,11 +22,11 @@ class LoginBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {
-        if (state is LoginSuccessState) {
-          if (state.loginModel.status) {
-            // print(state.loginModel.message);
-            // print(state.loginModel.data?.token);
-            CacheHelper.saveData(
+        if (state is LoginSuccessState)
+        {
+          if (state.loginModel.status)
+          {
+             CacheHelper.saveData(
               key: 'token',
               value: state.loginModel.data?.token,
             ).then(
@@ -39,7 +39,7 @@ class LoginBody extends StatelessWidget {
               },
             );
           } else {
-            print(state.loginModel.message);
+
             // showToast for login error
             showToast(
               message: state.loginModel.message,
@@ -109,7 +109,7 @@ class LoginBody extends StatelessWidget {
                         LoginCubit.get(context).changePasswordVisibility();
                       },
                       onSubmit: (value) {
-                        if (formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate() == true) {
                           LoginCubit.get(context).userLogin(
                             email: emailController.text,
                             password: passwordController.text,
@@ -126,7 +126,7 @@ class LoginBody extends StatelessWidget {
                           const Center(child: CircularProgressIndicator()),
                       builder: (context) => defaultButton(
                         function: () {
-                          if (formKey.currentState!.validate()) {
+                          if (formKey.currentState!.validate() == true) {
                             LoginCubit.get(context).userLogin(
                               email: emailController.text,
                               password: passwordController.text,
@@ -137,8 +137,16 @@ class LoginBody extends StatelessWidget {
                         isUpperCase: true,
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    const SizedBox(height: 15),
+                    Center(
+                      child: TextButton(
+                        child: const Text(
+                          "Forget your password ?",
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {},
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -150,12 +158,8 @@ class LoginBody extends StatelessWidget {
                         defaultTextButton(
                             text: 'Register now',
                             function: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreen(),
-                                  ));
+                              // ignore: prefer_const_constructors
+                              navigateAndFinish(context,  RegisterScreen());
                             }),
                       ],
                     )

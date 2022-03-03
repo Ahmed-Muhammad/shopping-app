@@ -29,7 +29,7 @@ class LoginCubit extends Cubit<LoginStates> {
         'password': password,
       },
     ).then((value) {
-      print(value.data);
+      // print(value.data);
       //اخدت الداتا اللي جاياني من السيرفر
       loginModel = LoginModel.fromJson(value.data);
       emit(LoginSuccessState(loginModel!));

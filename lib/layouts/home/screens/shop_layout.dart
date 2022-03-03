@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/Shared/components.dart';
-import 'package:untitled2/features/search/screen/Search_screen.dart';
+import 'package:untitled2/features/search/screen/search_screen.dart';
 import 'package:untitled2/layouts/home/Widgets/cubit/shop_cubit.dart';
 import 'package:untitled2/layouts/home/Widgets/cubit/shop_state.dart';
 
@@ -27,7 +27,7 @@ class ShopLayout extends StatelessWidget {
               IconButton(
                 onPressed: () => navigateTo(
                   context,
-                  const SearchScreen(),
+                   SearchScreen(),
                 ),
                 icon: const Icon(Icons.search),
               ),

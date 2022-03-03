@@ -11,6 +11,7 @@ import 'features/login/Screens/login_screen.dart';
 import 'features/login/Widgets/cubit/bloc_observer.dart';
 import 'features/login/Widgets/cubit/login_cubit.dart';
 import 'features/on_boarding/Screens/on_boardin_screen.dart';
+import 'features/search/widgets/search_cubit.dart';
 import 'layouts/home/screens/shop_layout.dart';
 
 void main() async {
@@ -62,6 +63,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginCubit(),
         ),
+        BlocProvider(
+        create: (context) => SearchCubit(),),
         //ShopCubit
         BlocProvider(
           create: (context) => ShopCubit()

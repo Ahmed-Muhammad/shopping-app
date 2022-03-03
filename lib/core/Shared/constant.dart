@@ -17,7 +17,7 @@ import '../cache/cache_helper.dart';
 import 'components.dart';
 
 String? token = '';
-
+String? recivedEmail ='';
 signOut(context){
 
   CacheHelper.removeData(key: 'token').then((value) {
