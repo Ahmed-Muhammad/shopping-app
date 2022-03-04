@@ -140,7 +140,7 @@ Widget defaultFormField({
   Function(String)? onSubmit,
   Function(String)? onChanged,
   GestureTapCallback? onTap,
-  required String? Function(String?)? validate,
+   String? Function(String?)? validate,
   required String? label,
   required IconData? prefix,
   bool isClickable = true,

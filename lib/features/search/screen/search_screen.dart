@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/Shared/components.dart';
@@ -8,7 +9,7 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
 
   var formKey = GlobalKey<FormState>();
-  var searchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,37 +26,32 @@ class SearchScreen extends StatelessWidget {
               child: Column(
                 children: [
                   defaultFormField(
-                   onSubmit: (text){
-                     text = searchController.text;
-                     SearchCubit.get(context).search(searchText: text);
-                   },
+                    onSubmit: (text) {
+                      print('before on Submit text ===> $text');
+                      SearchCubit.get(context).search(searchText: text);
+                      print('after on Submit text ===> $text');
+                    },
                     type: TextInputType.text,
                     controller: searchController,
-                    validate: (text) {
-                      if (text!.isEmpty) {
-                        return 'Enter a text to search';
-                      }
-                      return 'error';
-                    },
                     label: 'Type anything to search',
                     prefix: Icons.search,
                   ),
-                  const SizedBox(
-                    height: 10,
+
+                  const SizedBox(height: 10),
+                  ConditionalBuilder(
+                    condition: state is SearchLoadingState,
+                    builder: (context) => const LinearProgressIndicator(),
+                    fallback: (context) => Container(),
                   ),
-                  if (state is SearchLoadingState)
-                    const LinearProgressIndicator(),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  if (state is SearchLoadingState)
-                    Expanded(
+                  const SizedBox(height: 10),
+                  ConditionalBuilder(
+                    condition: state is SearchSuccessState,
+                    builder: (context) => Expanded(
                       child: ListView.separated(
                         itemBuilder: (context, index) {
                           return buildSearchProduct(
                             context,
-                            index,
-                            model: cubit.searchModel!.data!.data![index],
+                            cubit.searchModel!.data!.data![index],
                             isOldPrice: false,
                           );
                         },
@@ -63,6 +59,8 @@ class SearchScreen extends StatelessWidget {
                         itemCount:cubit.searchModel!.data!.data!.length,
                       ),
                     ),
+                    fallback: (context) => Container(),
+                  )
                 ],
               ),
             ),
@@ -71,7 +69,8 @@ class SearchScreen extends StatelessWidget {
       },
     );
   }
-  Widget buildSearchProduct(context,index ,{bool isOldPrice = true, model}) {
+
+  Widget buildSearchProduct(context, model, {bool isOldPrice = true}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
@@ -86,11 +85,10 @@ class SearchScreen extends StatelessWidget {
                 alignment: AlignmentDirectional.bottomStart,
                 children: [
                   Image(
-                    image: NetworkImage(SearchCubit.get(context).searchModel?.data?.data?[index].image ?? ''),
+                    image: NetworkImage(model.image),
                     height: 120,
                     width: 120,
                   ),
-
                 ],
               ),
             ),
@@ -102,7 +100,7 @@ class SearchScreen extends StatelessWidget {
                 children: [
                   //product Name
                   Text(
-                    SearchCubit.get(context).searchModel?.data?.data?[index].name?? '',
+                    model.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -113,7 +111,7 @@ class SearchScreen extends StatelessWidget {
                     children: [
                       //product Price
                       Text(
-                        SearchCubit.get(context).searchModel?.data?.data?[index].price ?? '',
+                        model.price.toString(),
                         style: const TextStyle(
                             color: Colors.deepPurple,
                             fontSize: 14,
@@ -125,7 +123,6 @@ class SearchScreen extends StatelessWidget {
                       //product old Price
 
                       const Spacer(),
-
                     ],
                   ),
                 ],

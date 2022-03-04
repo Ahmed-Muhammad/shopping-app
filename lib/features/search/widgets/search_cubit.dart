@@ -21,13 +21,15 @@ class SearchCubit extends Cubit<SearchState> {
     required String searchText,
   }) {
     emit(SearchLoadingState());
+    print('search Text ===> $searchText');
     DioHelper.postData(
       url: productsSearch,
       token: token,
-      lang: 'en',
       data: {"text": searchText},
+
     ).then((value) {
       searchModel = SearchModel.fromJson(value.data);
+      print('search result ===> ${value.data.toString()}');
       emit(SearchSuccessState());
     }).catchError((error) {
       print('search error ===> ${error.toString()}');
